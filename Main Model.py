@@ -15,9 +15,4 @@ vk  =
 ak  =        #area of rising particle. which is spherical
 c1  =        #concentration of solution
 
-#this is a test to see if git works.
-
-#testing to push this change
-#blah blah blah
-
-#This is a test from laptop spyder
+#First test

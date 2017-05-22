@@ -41,5 +41,6 @@ def manysailors():
     plt.xlabel('Final Position')
     plt.ylabel('Number of sailors')
     plt.hist(arraypos,bins ='auto',histtype="bar")          #could use bins = 'auto'
-    plt.savefig('users/nick/desktop/Many_sailors.png')
-       
+#    plt.savefig('users/nick/desktop/Many_sailors.png')
+
+manysailors()

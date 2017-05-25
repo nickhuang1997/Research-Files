@@ -40,7 +40,7 @@ def manysailors():
 #    bins = np.arange(-nsteps,nsteps)
     plt.xlabel('Final Position')
     plt.ylabel('Number of sailors')
-    plt.hist(arraypos,bins ='auto',histtype="bar")          #could use bins = 'auto'
+    plt.hist(arraypos,bins =nsteps,histtype="bar")          #could use bins = 'auto'
 #    plt.savefig('users/nick/desktop/Many_sailors.png')
 
 manysailors()

@@ -6,40 +6,34 @@ Created on Thu May 25 11:37:40 2017
 """
 
 import numpy as np
-
 np.set_printoptions(threshold=np.inf)           #shows entire array. does not have ... in it
-#from scipy.integrate import odeint
-#import matplotlib.pyplot as plt
 from scipy.integrate import odeint
 import matplotlib.pyplot as plt
 
 
-def f(m):
-    sigma   = 1000      #M/min
-
-    endtime = 2
-    timestep= 100
-
-    endtime = 15
-    timestep= 1
-    array   = np.zeros(endtime)
+def f():
     
-    for i in range(0,endtime,timestep):
+    sigma   = 1      #M/min
+    m       = 10**-6     # num of monomers
+    endtime = 10
+    timestep= .9
+    timearray   = np.arange(0,endtime,timestep)
+    
+    #find size of array
+    for i in range(0,len(timearray)):
         dmdt     = sigma - r(m)
-        array[i] = dmdt
-    return array
+        timearray[i] = dmdt
+        m        = m + dmdt
+    return timearray
 
        
     
 
 def r(m):
-    g = 0.278   #1/min
-#    m    = 100      #number of monomers (M)
-    
-    dmdd  = g * m
-    
-    return dmdd
+    g    = 0.278   #1/min
+    c    = 500
+    fmd  =  m * g
+#    fmd  = 2*c*m**2
+    return fmd
 
-
-f(10)
-
+f()

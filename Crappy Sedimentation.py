@@ -19,21 +19,37 @@ def f():
     timestep= .9
     timearray   = np.arange(0,endtime,timestep)
     
-    #find size of array
+
     for i in range(0,len(timearray)):
         dmdt     = sigma - r(m)
+#        m1 = odeint() Do I need to solve?   
+        
         timearray[i] = dmdt
         m        = m + dmdt
-    return timearray
-
-       
+#    return timearray
+    x = range(0,len(timearray))
+    y = timearray
+    
+    
+    plt.plot(x,y)
+    plt.xlabel('Time (min)')
+    plt.ylabel('Concentration... in mM')
+    plt.title('Molarity of monomer LTB4 over time')
+           
     
 
 def r(m):
     g    = 0.278   #1/min
-    c    = 500
+    c    = 1.3
     fmd  =  m * g
 #    fmd  = 2*c*m**2
     return fmd
+
+
+def d(m):
+    
+
+
+
 
 f()

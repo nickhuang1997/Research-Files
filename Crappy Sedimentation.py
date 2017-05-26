@@ -6,23 +6,30 @@ Created on Thu May 25 11:37:40 2017
 """
 
 import numpy as np
+
+np.set_printoptions(threshold=np.inf)           #shows entire array. does not have ... in it
+#from scipy.integrate import odeint
+#import matplotlib.pyplot as plt
 from scipy.integrate import odeint
 import matplotlib.pyplot as plt
-np.set_printoptions(threshold=np.inf) #shows entire array. does not have ... in it
 
 
 def f(m):
     sigma   = 1000      #M/min
+
     endtime = 2
     timestep= 100
-    array   = np.zeros(timestep)
+
+    endtime = 15
+    timestep= 1
+    array   = np.zeros(endtime)
     
-    for i in np.arange(0 , endtime, timestep):
-        
+    for i in range(0,endtime,timestep):
         dmdt     = sigma - r(m)
         array[i] = dmdt
-        return array
-        
+    return array
+
+       
     
 
 def r(m):
@@ -32,4 +39,7 @@ def r(m):
     dmdd  = g * m
     
     return dmdd
+
+
+f(10)
 

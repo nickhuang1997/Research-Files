@@ -41,6 +41,4 @@ def manysailors():
     plt.xlabel('Final Position')
     plt.ylabel('Number of sailors')
 
-    plt.hist(arraypos,bins =nsteps,histtype="bar")          #could use bins = 'auto'
-
 manysailors()

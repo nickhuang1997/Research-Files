@@ -23,10 +23,8 @@ def f():
     for i in range(0,len(timearray)):
         dmdt     = sigma - r(m)
 #        m1 = odeint() Do I need to solve?   
-        
         timearray[i] = dmdt
         m        = m + dmdt
-#    return timearray
     x = range(0,len(timearray))
     y = timearray
     
@@ -47,7 +45,9 @@ def r(m):
 
 
 def d(m):
-    
+    c1   = 
+    dddt = c1 * m**2
+    return dddt 
 
 
 

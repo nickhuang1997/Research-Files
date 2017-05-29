@@ -34,20 +34,27 @@ def f():
     plt.ylabel('Concentration... in mM')
     plt.title('Molarity of monomer LTB4 over time')
            
+
+def firstorder(m,t,sigma):
+    sigma = 1
+    dmdt = sigma - r(m)
+    return dmdt
+
     
 
 def r(m):
     g    = 0.278   #1/min
-    c    = 1.3
     fmd  =  m * g
+
+#    c    = 1.3
 #    fmd  = 2*c*m**2
     return fmd
 
 
-def d(m):
-    c1   = 
-    dddt = c1 * m**2
-    return dddt 
+#def d(m):
+#    c1   = 
+#    dddt = c1 * m**2
+#    return dddt 
 
 
 

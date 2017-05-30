@@ -32,7 +32,7 @@ def f():
     plt.plot(x,y)
     plt.xlabel('Time (min)')
     plt.ylabel('Concentration... in mM')
-    plt.title('Molarity of monomer LTB4 over time')
+    plt.title('Rate of change of concentration of monomer LTB4 over time')
            
 
 def firstorder(m,t,sigma):

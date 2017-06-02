@@ -12,48 +12,48 @@ import matplotlib.pyplot as plt
 
 
 def f():
-    
-    sigma   = 1      #M/min
-    m       = 10**-6     # num of monomers
-    q       = 10**-6
-    endtime = 10
-    timestep= .9
-    timearray   = np.arange(0,endtime,timestep)
-    timearray2  = np.arange(0,endtime,timestep)
-    
 
-    for i in range(0,len(timearray)):
-        dmdt            = sigma - r(m) 
-        timearray[i]    = dmdt
-        m               = m + dmdt
         
-        dmdt2           = sigma - s(q)
-        timearray2[i]   = dmdt2
-        q               = q + dmdt2
+        sigma   = 1      #M/min
+        m       =10**-6    # num of monomers
+        q       = 10**-6
+        endtime = 5
+        timestep= .0001
+        timearray   = np.arange(0,endtime,timestep)
+        timearray2  = np.arange(0,endtime,timestep)
         
-    x = range(0,len(timearray))
-    y = timearray
     
-    y2= timearray2
+        for i in range(0,len(timearray)):
+            dmdt            = sigma - r(m) 
+            timearray[i]    = dmdt
+            m               = m + dmdt
+            
     
-    
-    
-    plt.plot(x,y, label = 'Gamma Line')
-    plt.plot(x,y2, label = "m^2 Line")
-    plt.xlabel('Time (min)')
-    plt.ylabel('Concentration... in mM')
-    plt.legend()
-    plt.title('Rate of change of concentration of monomer LTB4 over time')
-           
-
-def firstorder(m,t,sigma):
-    sigma = 1
-    dmdt = sigma - r(m)
-    return dmdt
+            dmdt2           = sigma - s(q)
+            timearray2[i]   = dmdt2
+            q               = q + dmdt2
+            
+            
+        x = range(0,len(timearray))
+        y = timearray
+        
+        y2= timearray2
+        print(y)
+        print(y2)
+        
+        
+        plt.plot(x,y, label = 'Gamma Line')
+        plt.plot(x,y2, label = "m^2 Line")
+        plt.xlabel('Time (min)')
+        plt.ylabel('Concentration... in mM')
+        plt.legend()
+        plt.title('Rate of change of concentration of monomer LTB4 over time')
+        
 
     
 
 def r(m):
+
     g    = 0.278   #1/min
     fmd  =  m * g
 
@@ -62,9 +62,10 @@ def r(m):
     return fmd
 
 def s(q):
+    
     c1  = 1       #constant value
     
-    fmd2 = 2*c1*q**2
+    fmd2 = c1*q**2
     
     return fmd2
 #def d(m):

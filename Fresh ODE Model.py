@@ -20,6 +20,10 @@ def arraymaker(numarray,endtime,timestep):
     """creates n number of arrays based on 
     the endtime and timestep that is specified"""    
     
+    manyarrays = [0]*numarray
     for i in range(0,numarray):
-        xarray = np.arange(0,endtime,timestep)
-        
+        array = np.arange(0,endtime,timestep)
+        manyarrays[i] = array
+    return manyarrays
+
+arraymaker(3,4,2)

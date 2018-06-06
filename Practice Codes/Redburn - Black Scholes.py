@@ -1,5 +1,12 @@
 # -*- coding: utf-8 -*-
 """
+Created on Wed Jun  6 10:35:07 2018
+
+@author: Nick
+"""
+
+# -*- coding: utf-8 -*-
+"""
 Created on Tue May 23 11:35:33 2017
 
 @author: njgh002
@@ -67,6 +74,7 @@ def data_gen():
     for t in T:
         yield expStart*exp(-m*t)
 
+
 ani = animation.FuncAnimation(fig, update, data_gen, interval=5)
 
-plt.show()    
+#plt.show()    

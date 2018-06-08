@@ -104,6 +104,9 @@ def plotter(matrix, y_label, x_label, yincre, xincre):
    
     print(x_label)    
     print(y_label)
+    for y in range(matrix.shape[0]):
+        for x in range(matrix.shape[1]):
+            plt.text(x, y, '%4f' %matrix[y,x], horizontalalignment='center', verticalalignment='center',color='w')
     
 
     extent = (min(x_label), max(x_label), min(y_label), max(y_label))
@@ -119,14 +122,11 @@ def plotter(matrix, y_label, x_label, yincre, xincre):
     
     
     
-    plt.tight_layout()
+    
     plt.ylabel('Stock Price ($)')
     plt.xlabel('Volatility (as decimal)')
 #    fig.colorbar(im)
     
-    for y in range(matrix.shape[0]):
-        for x in range(matrix.shape[1]):
-            plt.text(x, y, '%4f' %matrix[y,x], horizontalalignment='center', verticalalignment='center',color='w')
     
     #ax.autoscale(tight=True)
     #ax.set_aspect('equal')

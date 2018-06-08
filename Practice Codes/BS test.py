@@ -114,7 +114,7 @@ def plotter(matrix, y_label, x_label, yincre, xincre):
     fig, ax = plt.subplots(figsize=(20,10))#(figsize=(width,height))
 
 
-    heatmap = ax.pcolor(matrix )
+    heatmap = ax.pcolor(matrix)
                         #edgecolors=edgecolors,  # put white lines between squares in heatmap
 #                        cmap=cmap,
 #                        norm=norm)
@@ -130,13 +130,12 @@ def plotter(matrix, y_label, x_label, yincre, xincre):
 
     ax.autoscale(tight=True)  # get rid of whitespace in margins of heatmap
     ax.set_aspect('equal')  # ensure heatmap cells are square
-#    ax.xaxis.set_ticks_position('top')  # put column labels at the top
     ax.tick_params(bottom='off', top='off', left='off', right='off')  # turn off ticks
 
-    fig.colorbar(heatmap)   #must put colorbar before the set_ticks otherwise it will 
+#    fig.colorbar(heatmap)   #must put colorbar before the set_ticks otherwise it will 
                             #not show up (suspect that set_ticks overwrites the colorbar)
     ax.set_yticks(np.arange(len(y_label)) + 0.5)
-    ax.set_yticklabels(y_label, size=20)
+    ax.set_yticklabels(y_label, size=15)
     
     ax.set_xticks(np.arange(len(x_label)) + 0.5)
     ax.set_xticklabels(x_label, size= 15)
@@ -147,8 +146,8 @@ def plotter(matrix, y_label, x_label, yincre, xincre):
     cax = divider.append_axes("right", "3%", pad="1%")
     
     
-#    plt.ylabel('Stock Price ($)')
-#    plt.xlabel('Volatility (as decimal)')
+    plt.ylabel('Stock Price ($)')
+    plt.xlabel('Volatility (as decimal)')
     
     """
     fig, ax = plt.subplots()

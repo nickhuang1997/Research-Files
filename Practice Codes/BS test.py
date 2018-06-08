@@ -131,10 +131,9 @@ def plotter(matrix, y_label, x_label, yincre, xincre):
 
     fig.colorbar(heatmap)   #must put colorbar before the set_ticks otherwise it will 
                             #not show up (suspect that set_ticks overwrites the colorbar)
-    ax.set_yticks(np.arange(len(matrix.index)) + 0.5)
-    ax.set_yticklabels(matrix.index, size=20)
-    ax.set_xticks(np.arange(len(matrix.columns)) + 0.5)
-    ax.set_xticklabels(matrix.columns, rotation=90, size= 15)
+    ax.set_yticks(np.arange(len(matrix)) + 0.5)
+    ax.set_yticklabels(matrix, size=20)
+    ax.set_xticks(np.arange(len(matrix)) + 0.5)
     
     # ugliness from http://matplotlib.org/users/tight_layout_guide.html
     from mpl_toolkits.axes_grid1 import make_axes_locatable

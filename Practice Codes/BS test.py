@@ -19,15 +19,15 @@ def main():
     this function sets up the matrix and has 
     increment values for the Y and X axis
     """
-    ans             = '10 20' #input('Lower and upper stock prices you are examining? ')
+    ans             = '196 197' #input('Lower and upper stock prices you are examining? ')
     ans_split       = [float(n) for n in ans.split(' ' )]                     #[lower, upper]
-    stock_increment = 4 #input('How many increments? ')
+    stock_increment = 5 #input('How many increments? ')
     
     stock_array    = np.linspace(ans_split[0], ans_split[1], stock_increment)
 
-    ans_1           = '10 15' #input('Lower and upper volatilities you are examining (%)? ')
+    ans_1           = '10 11' #input('Lower and upper volatilities you are examining (%)? ')
     ans_split1      = [float(n) for n in ans_1.split(' ' )]                     #[lower, upper]
-    vol_increment   = 4 #input('How many increments? ')
+    vol_increment   = 5 #input('How many increments? ')
         
     vol_array       = np.linspace(ans_split1[0], ans_split1[1], vol_increment)
     
@@ -60,7 +60,8 @@ def put_shit_in_matrix(stock_list, volatility_list, matrix):
     for i in range(len(stock_list)):            #array of stock prices
         for n in range(len(volatility_list)):   #array of volatilities
             #print(matrix)
-            matrix[i][n] = BlackScholes_1(stock_list[i], volatility_list[n])
+            print(volatility_list[n]/100)
+            matrix[i][n] = BlackScholes_1(stock_list[i], (volatility_list[n]/100))
             #puts the black scholes value in the matrix
             #print(matrix)
             
@@ -88,9 +89,9 @@ def BlackScholes_1(S, v):
     d = .03         #dividend yield
 #    v = .13         #percentage as decimal
     
-    print('new run')
-    print(S)
-    print(v)
+#    print('new run')
+#    print(S)
+#    print(v)
     
     d1 = (log(float(S)/K)+((r-d)+v*v/2.)*T)/(v*sqrt(T))
     d2 = d1-v*sqrt(T)
@@ -132,7 +133,7 @@ def plotter(matrix, y_label, x_label, yincre, xincre):
     ax.set_aspect('equal')  # ensure heatmap cells are square
 #    ax.tick_params(bottom='off', top='off', left='off', right='off')  # turn off ticks
 
-#    fig.colorbar(heatmap)   #must put colorbar before the set_ticks otherwise it will 
+    fig.colorbar(heatmap)   #must put colorbar before the set_ticks otherwise it will 
                             #not show up (suspect that set_ticks overwrites the colorbar)
     ax.set_yticks(np.arange(len(y_label)) + 0.5)
     ax.set_yticklabels(y_label, size=15)

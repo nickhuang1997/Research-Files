@@ -19,15 +19,15 @@ def main():
     this function sets up the matrix and has 
     increment values for the Y and X axis
     """
-    ans             = '196 197' #input('Lower and upper stock prices you are examining? ')
+    ans             = input('Lower and upper stock prices you are examining? ')
     ans_split       = [float(n) for n in ans.split(' ' )]                     #[lower, upper]
-    stock_increment = 5 #input('How many increments? ')
+    stock_increment = int(input('How many increments for stock price? '))
     
     stock_array    = np.linspace(ans_split[0], ans_split[1], stock_increment)
 
-    ans_1           = '10 11' #input('Lower and upper volatilities you are examining (%)? ')
+    ans_1           = input('Lower and upper volatilities you are examining (%)? ')
     ans_split1      = [float(n) for n in ans_1.split(' ' )]                     #[lower, upper]
-    vol_increment   = 5 #input('How many increments? ')
+    vol_increment   = int(input('How many increments for vol? '))
         
     vol_array       = np.linspace(ans_split1[0], ans_split1[1], vol_increment)
     
@@ -61,7 +61,7 @@ def put_shit_in_matrix(stock_list, volatility_list, matrix):
         for n in range(len(volatility_list)):   #array of volatilities
             #print(matrix)
             print(volatility_list[n]/100)
-            matrix[i][n] = BlackScholes_1(stock_list[i], (volatility_list[n]/100))
+            matrix[i][n] = BlackScholes_1(stock_list[i], (volatility_list[n]))
             #puts the black scholes value in the matrix
             #print(matrix)
             

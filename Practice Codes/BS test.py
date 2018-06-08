@@ -99,6 +99,50 @@ def plotter(matrix, y_label, x_label, yincre, xincre):
     """
     pain in ass function that formats the graph
     """
+
+#def heatmap_binary(df,
+ #           edgecolors='w',
+            #cmap=mpl.cm.RdYlGn,
+  #          log=False):    
+#    width = len(df.columns)/7*10
+#    height = len(df.index)/7*10
+
+    fig, ax = plt.subplots(figsize=(20,10))#(figsize=(width,height))
+
+
+    heatmap = ax.pcolor(matrix )
+                        #edgecolors=edgecolors,  # put white lines between squares in heatmap
+#                        cmap=cmap,
+#                        norm=norm)
+    data = matrix
+    for y in range(data.shape[0]):
+        for x in range(data.shape[1]):
+            plt.text(x + 0.5, y +0.5, '%.4f' % data[y, x], #data[y,x] +0.05 , data[y,x] + 0.05
+                 horizontalalignment='center',
+                 verticalalignment='center')
+#            ,
+#                 color='w')
+
+
+    ax.autoscale(tight=True)  # get rid of whitespace in margins of heatmap
+    ax.set_aspect('equal')  # ensure heatmap cells are square
+#    ax.xaxis.set_ticks_position('top')  # put column labels at the top
+    ax.tick_params(bottom='off', top='off', left='off', right='off')  # turn off ticks
+
+    fig.colorbar(heatmap)   #must put colorbar before the set_ticks otherwise it will 
+                            #not show up (suspect that set_ticks overwrites the colorbar)
+    ax.set_yticks(np.arange(len(matrix.index)) + 0.5)
+    ax.set_yticklabels(matrix.index, size=20)
+    ax.set_xticks(np.arange(len(matrix.columns)) + 0.5)
+    ax.set_xticklabels(matrix.columns, rotation=90, size= 15)
+    
+    # ugliness from http://matplotlib.org/users/tight_layout_guide.html
+    from mpl_toolkits.axes_grid1 import make_axes_locatable
+    divider = make_axes_locatable(ax)
+    cax = divider.append_axes("right", "3%", pad="1%")
+     #, cax=cax)
+    
+    """
     fig, ax = plt.subplots()
 
    
@@ -136,6 +180,7 @@ def plotter(matrix, y_label, x_label, yincre, xincre):
 #    for i in range(len(y_label)):
 #        for j in range(len(x_label)):
 #            text = ax.text(j,i, matrix[i, j], ha='center', va='center') #, color='b')
+    """
     
     
     

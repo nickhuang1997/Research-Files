@@ -130,7 +130,7 @@ def plotter(matrix, y_label, x_label, yincre, xincre):
 
     ax.autoscale(tight=True)  # get rid of whitespace in margins of heatmap
     ax.set_aspect('equal')  # ensure heatmap cells are square
-    ax.tick_params(bottom='off', top='off', left='off', right='off')  # turn off ticks
+#    ax.tick_params(bottom='off', top='off', left='off', right='off')  # turn off ticks
 
 #    fig.colorbar(heatmap)   #must put colorbar before the set_ticks otherwise it will 
                             #not show up (suspect that set_ticks overwrites the colorbar)
@@ -139,12 +139,6 @@ def plotter(matrix, y_label, x_label, yincre, xincre):
     
     ax.set_xticks(np.arange(len(x_label)) + 0.5)
     ax.set_xticklabels(x_label, size= 15)
-    
-    # ugliness from http://matplotlib.org/users/tight_layout_guide.html
-    from mpl_toolkits.axes_grid1 import make_axes_locatable
-    divider = make_axes_locatable(ax)
-    cax = divider.append_axes("right", "3%", pad="1%")
-    
     
     plt.ylabel('Stock Price ($)')
     plt.xlabel('Volatility (as decimal)')

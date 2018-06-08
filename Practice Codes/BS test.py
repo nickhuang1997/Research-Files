@@ -25,16 +25,20 @@ def main():
     
     stock_array    = np.linspace(ans_split[0], ans_split[1], stock_increment)
 
-    ans_1           = '10 20' #input('Lower and upper volatilities you are examining (%)? ')
+    ans_1           = '10 15' #input('Lower and upper volatilities you are examining (%)? ')
     ans_split1      = [float(n) for n in ans_1.split(' ' )]                     #[lower, upper]
     vol_increment   = 4 #input('How many increments? ')
         
     vol_array       = np.linspace(ans_split1[0], ans_split1[1], vol_increment)
     
+    
     matrix = matrix_maker(len(stock_array),len(vol_array))
     
     final = put_shit_in_matrix(stock_array, vol_array, matrix)
     print(final)
+    print(vol_array)
+    print(stock_array)
+    
     return plotter(final, stock_array, vol_array, stock_increment, vol_increment)
     
 def matrix_maker(yaxis, xaxis):
@@ -131,15 +135,20 @@ def plotter(matrix, y_label, x_label, yincre, xincre):
 
     fig.colorbar(heatmap)   #must put colorbar before the set_ticks otherwise it will 
                             #not show up (suspect that set_ticks overwrites the colorbar)
-    ax.set_yticks(np.arange(len(matrix)) + 0.5)
-    ax.set_yticklabels(matrix, size=20)
-    ax.set_xticks(np.arange(len(matrix)) + 0.5)
+    ax.set_yticks(np.arange(len(y_label)) + 0.5)
+    ax.set_yticklabels(y_label, size=20)
+    
+    ax.set_xticks(np.arange(len(x_label)) + 0.5)
+    ax.set_xticklabels(x_label, size= 15)
     
     # ugliness from http://matplotlib.org/users/tight_layout_guide.html
     from mpl_toolkits.axes_grid1 import make_axes_locatable
     divider = make_axes_locatable(ax)
     cax = divider.append_axes("right", "3%", pad="1%")
-     #, cax=cax)
+    
+    
+#    plt.ylabel('Stock Price ($)')
+#    plt.xlabel('Volatility (as decimal)')
     
     """
     fig, ax = plt.subplots()
@@ -163,8 +172,7 @@ def plotter(matrix, y_label, x_label, yincre, xincre):
     
     
     plt.tight_layout()
-    plt.ylabel('Stock Price ($)')
-    plt.xlabel('Volatility (as decimal)')
+    
 #    fig.colorbar(im)
     
     for y in range(matrix.shape[0]):

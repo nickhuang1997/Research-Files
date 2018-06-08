@@ -14,7 +14,7 @@ def main():
     uses all helper functions to run program
     takes the following inputs...
     1) Spot price range and step value
-    2) Volatility range
+    2) Volatility ranges
     3) Strike price 
     4) Risk free rate
     5) Dividend Yield
@@ -37,8 +37,8 @@ def main():
     
     matrix = matrix_maker(len(stock_array),len(vol_array))
     
-    strikeprice     =62.50      #float(input('What is the strike price? '))
-    TimeToMat       =10              #float(input('How long until expiration? (days) '))
+    strikeprice     =60.50      #float(input('What is the strike price? '))
+    TimeToMat       =1              #float(input('How long until expiration? (days) '))
     rfr             =.05         #float(input('What is the risk free rate? (as decimal) '))
     divY            =.01         #float(input('What is the divident yield? (as decimal) '))
     
@@ -124,6 +124,7 @@ def plotter(matrix, y_label, x_label, yincre, xincre):
 #    ax.tick_params(bottom='off', top='off', left='off', right='off')  # turn off ticks
     cbar = fig.colorbar(heatmap)   
     cbar.ax.set_ylabel('Option Premia ($)', size = 15, labelpad = 20, rotation=270)
+    
     
 #must put colorbar before the set_ticks otherwise it will 
 #not show up (suspect that set_ticks overwrites the colorbar)

@@ -12,25 +12,26 @@ import matplotlib.animation as animation
 
 from math import *
 from scipy.stats import norm
-
+from matplotlib.ticker import Formatter #for axis formatting obviously
 
 def main():
     """
     this function sets up the matrix and has 
     increment values for the Y and X axis
     """
-    ans             = input('Lower and upper stock prices you are examining? ')
+    ans             = '196 197' #input('Lower and upper stock prices you are examining? ')
     ans_split       = [float(n) for n in ans.split(' ' )]                     #[lower, upper]
-    stock_increment = int(input('How many increments for stock price? '))
+    stock_increment = 5 #int(input('How many increments for stock price? '))
     
     stock_array    = np.linspace(ans_split[0], ans_split[1], stock_increment)
-
-    ans_1           = input('Lower and upper volatilities you are examining (%)? ')
+    stock_array = stock_array.round(decimals=2) #rounds the array to 2 decimals. 
+    
+    ans_1           = '10 20' #input('Lower and upper volatilities you are examining (%)? ')
     ans_split1      = [float(n) for n in ans_1.split(' ' )]                     #[lower, upper]
-    vol_increment   = int(input('How many increments for vol? '))
+    vol_increment   = 5 #int(input('How many increments for vol? '))
         
     vol_array       = np.linspace(ans_split1[0], ans_split1[1], vol_increment)
-    
+    vol_array = vol_array.round(decimals=2) #rounds the array to 2 decimals. 
     
     matrix = matrix_maker(len(stock_array),len(vol_array))
     
@@ -59,15 +60,17 @@ def put_shit_in_matrix(stock_list, volatility_list, matrix):
     
     for i in range(len(stock_list)):            #array of stock prices
         for n in range(len(volatility_list)):   #array of volatilities
-            #print(matrix)
             print(volatility_list[n]/100)
-            matrix[i][n] = BlackScholes_1(stock_list[i], (volatility_list[n]))
+            matrix[i][n] = BlackScholes_1(stock_list[i], (volatility_list[n]/100)) #need to divide by 100 bc given as %
             #puts the black scholes value in the matrix
-            #print(matrix)
-            
     return matrix    
         
-""" # The Black Scholes Formula
+def BlackScholes_1(S, v):
+    """
+    this function calculates the option 
+    premium given a spot and vol value
+    
+    # The Black Scholes Formula
 # CallPutFlag - This is set to 'c' for call option, anything else for put
 # S - Stock price
 # K - Strike price
@@ -75,11 +78,6 @@ def put_shit_in_matrix(stock_list, volatility_list, matrix):
 # r - Riskfree interest rate
 # d - Dividend yield
 # v - Volatility
-"""
-def BlackScholes_1(S, v):
-    """
-    this function calculates the option 
-    premium given a spot and vol value
     """
     CallPutFlag = 'c'
 #    S = 196.2       #spot price
@@ -105,85 +103,35 @@ def plotter(matrix, y_label, x_label, yincre, xincre):
     pain in ass function that formats the graph
     """
 
-#def heatmap_binary(df,
- #           edgecolors='w',
-            #cmap=mpl.cm.RdYlGn,
-  #          log=False):    
-#    width = len(df.columns)/7*10
-#    height = len(df.index)/7*10
 
     fig, ax = plt.subplots(figsize=(20,10))#(figsize=(width,height))
 
 
     heatmap = ax.pcolor(matrix)
-                        #edgecolors=edgecolors,  # put white lines between squares in heatmap
-#                        cmap=cmap,
-#                        norm=norm)
+#                        edgecolors='w')  # put white lines between squares in heatmap
     data = matrix
     for y in range(data.shape[0]):
         for x in range(data.shape[1]):
             plt.text(x + 0.5, y +0.5, '%.4f' % data[y, x], #data[y,x] +0.05 , data[y,x] + 0.05
                  horizontalalignment='center',
                  verticalalignment='center')
-#            ,
-#                 color='w')
 
 
     ax.autoscale(tight=True)  # get rid of whitespace in margins of heatmap
     ax.set_aspect('equal')  # ensure heatmap cells are square
-#    ax.tick_params(bottom='off', top='off', left='off', right='off')  # turn off ticks
 
-    fig.colorbar(heatmap)   #must put colorbar before the set_ticks otherwise it will 
-                            #not show up (suspect that set_ticks overwrites the colorbar)
+#if you want to take out tick marks, uncomment below
+#    ax.tick_params(bottom='off', top='off', left='off', right='off')  # turn off ticks
+    fig.colorbar(heatmap)   
+#must put colorbar before the set_ticks otherwise it will 
+#not show up (suspect that set_ticks overwrites the colorbar)
     ax.set_yticks(np.arange(len(y_label)) + 0.5)
     ax.set_yticklabels(y_label, size=15)
     
     ax.set_xticks(np.arange(len(x_label)) + 0.5)
     ax.set_xticklabels(x_label, size= 15)
-    
+#    ax.xaxis.set_major_formatter(format_pct())
     plt.ylabel('Stock Price ($)')
     plt.xlabel('Volatility (as decimal)')
-    
-    """
-    fig, ax = plt.subplots()
-
-   
-    print(x_label)    
-    print(y_label)
-    
-
-    extent = (min(x_label), max(x_label), min(y_label), max(y_label))
-      
-    right_aspect = ((max(x_label)-min(x_label))/int(xincre)/((max(y_label)-min(y_label))/int(yincre)))
-    #sets the right aspect ratio for the graph. since the Y and X axis are 
-    #weird numbers it gets wonky and this fixes it
-    ###Ensure that each cell in the graph is looks like a square
-     
-
-    #function below should display the respective cell value but it doesn't work with when
-    #extent is used in the ax.imshow() function              
-    
-    
-    
-    plt.tight_layout()
-    
-#    fig.colorbar(im)
-    
-    for y in range(matrix.shape[0]):
-        for x in range(matrix.shape[1]):
-            plt.text(x, y, '%4f' %matrix[y,x], horizontalalignment='center', verticalalignment='center',color='w')
-    
-    #ax.autoscale(tight=True)
-    #ax.set_aspect('equal')
-    
-    ax.imshow(matrix)# , extent=extent, aspect = right_aspect)
-    
-#    for i in range(len(y_label)):
-#        for j in range(len(x_label)):
-#            text = ax.text(j,i, matrix[i, j], ha='center', va='center') #, color='b')
-    """
-    
-    
-    
-    
+       
 main()

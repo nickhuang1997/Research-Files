@@ -25,16 +25,16 @@ def main():
     6) Days left until expiry
     7) 
     """
-    ans             = '150 312'                             #input('Lower and upper stock prices you are examining? ')
+    ans             = '150 200'                             #input('Lower and upper stock prices you are examining? ')
     ans_split       = [float(n) for n in ans.split(' ' )]   #[lower, upper]
-    stock_increment = 13 #int(input('How many increments for stock price? '))
+    stock_increment = 10 #int(input('How many increments for stock price? '))
     
     stock_array     = np.linspace(ans_split[0], ans_split[1], stock_increment)
     stock_array     = stock_array.round(decimals=2)             #rounds the array to 2 decimals. 
     
-    ans_1           = '8 20' #input('Lower and upper volatilities you are examining (%)? ')
+    ans_1           = '8 10' #input('Lower and upper volatilities you are examining (%)? ')
     ans_split1      = [float(n) for n in ans_1.split(' ' )] #[lower, upper]
-    vol_increment   = 13 #int(input('How many increments for vol? '))
+    vol_increment   = 10 #int(input('How many increments for vol? '))
         
     vol_array       = np.linspace(ans_split1[0], ans_split1[1], vol_increment)
     vol_array       = vol_array.round(decimals=2)                 #rounds the array to 2 decimals. 
@@ -119,10 +119,7 @@ def plotter(matrix, y_label, x_label, yincre, xincre):
     """
     pain in ass function that formats the graph
     """
-
-
     fig, ax = plt.subplots(figsize=(20,10))#(figsize=(width,height))
-
 
     heatmap = ax.pcolor(matrix)
 #                        edgecolors='w')  # put white lines between squares in heatmap
@@ -138,16 +135,18 @@ def plotter(matrix, y_label, x_label, yincre, xincre):
 
 #if you want to take out tick marks, uncomment below
 #    ax.tick_params(bottom='off', top='off', left='off', right='off')  # turn off ticks
-    fig.colorbar(heatmap)   
+    cbar = fig.colorbar(heatmap)   
+    cbar.ax.set_ylabel('Option Premia ($)', size = 15, labelpad = 20, rotation=270)
+    
 #must put colorbar before the set_ticks otherwise it will 
 #not show up (suspect that set_ticks overwrites the colorbar)
     ax.set_yticks(np.arange(len(y_label)) + 0.5)
     ax.set_yticklabels(y_label, size=15)
-    
+       
     ax.set_xticks(np.arange(len(x_label)) + 0.5)
-    ax.set_xticklabels(x_label, size= 15)
+    ax.set_xticklabels(x_label, size=15)
 #    ax.xaxis.set_major_formatter(format_pct())
-    plt.ylabel('Stock Price ($)')
-    plt.xlabel('Volatility (as decimal)')
+    plt.ylabel('Stock Price ($)',size = 15)
+    plt.xlabel('Volatility (%)',size = 15)
        
 main()

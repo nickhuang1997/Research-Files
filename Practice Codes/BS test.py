@@ -37,8 +37,8 @@ def main():
     
     matrix = matrix_maker(len(stock_array),len(vol_array))
     
-    strikeprice     =60.50      #float(input('What is the strike price? '))
-    TimeToMat       =1              #float(input('How long until expiration? (days) '))
+    strikeprice     =62.50      #float(input('What is the strike price? '))
+    TimeToMat       =10              #float(input('How long until expiration? (days) '))
     rfr             =.05         #float(input('What is the risk free rate? (as decimal) '))
     divY            =.01         #float(input('What is the divident yield? (as decimal) '))
     
@@ -136,5 +136,6 @@ def plotter(matrix, y_label, x_label, yincre, xincre):
 #    ax.xaxis.set_major_formatter(format_pct())
     plt.ylabel('Stock Price ($)',size = 15)
     plt.xlabel('Volatility (%)',size = 15)
+    plt.suptitle('Stock Price vs. Volatility', x = .55, y = .91, size = 18)
        
 main()

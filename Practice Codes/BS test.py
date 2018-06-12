@@ -21,27 +21,27 @@ def main():
     6) Days left until expiry
     7) 
     """
-    stock_prices             = '60 68' #input('Lower and upper stock prices you are examining? ')
+    stock_prices             = '80 90'      #input('Lower and upper stock prices you are examining? ')
     stock_prices_split       = [float(n) for n in stock_prices.split(' ' )]   #[lower, upper]
-    stock_increment          = 10          #int(input('How many increments for stock price? '))
+    stock_increment          = 11           #int(input('How many increments for stock price? '))
     
+    vol_ranges               ='0 40'       #input('Lower and upper volatilities you are examining (%)? ') 
+    vol_ranges_split1        = [float(n) for n in vol_ranges.split(' ' )] #[lower, upper]
+    vol_increment            = 20           #int(input('How many increments for vol? '))    
+    
+    strikeprice              = 90       #float(input('What is the strike price? '))
+    TimeToMat                = 30          #float(input('How long until expiration? (days) '))
+    rfr                      =.05          #float(input('What is the risk free rate? (as decimal) '))
+    divY                     =.01          #float(input('What is the divident yield? (as decimal) '))
+        
     stock_array     = np.linspace(stock_prices_split[0], stock_prices_split[1], stock_increment)
     stock_array     = stock_array.round(decimals=2)             #rounds the array to 2 decimals. 
-    
-    vol_ranges               ='10 32'            #input('Lower and upper volatilities you are examining (%)? ') 
-    vol_ranges_split1        = [float(n) for n in vol_ranges.split(' ' )] #[lower, upper]
-    vol_increment            = 10           #int(input('How many increments for vol? '))
-        
+            
     vol_array       = np.linspace(vol_ranges_split1[0], vol_ranges_split1[1], vol_increment)
     vol_array       = vol_array.round(decimals=2)                 #rounds the array to 2 decimals. 
     
     matrix = matrix_maker(len(stock_array),len(vol_array))
-    
-    strikeprice     =62.50      #float(input('What is the strike price? '))
-    TimeToMat       =10              #float(input('How long until expiration? (days) '))
-    rfr             =.05         #float(input('What is the risk free rate? (as decimal) '))
-    divY            =.01         #float(input('What is the divident yield? (as decimal) '))
-    
+        
     complete_matrix = put_shit_in_matrix(stock_array, vol_array, matrix, 
                                          strikeprice, TimeToMat, rfr, divY)
     # S, v, K, T, r, D
